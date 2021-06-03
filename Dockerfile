@@ -1,7 +1,7 @@
 
 FROM ubuntu:20.04
 
-# Install CUDA, git, supervisor, VNC, & X11 packages 
+# Install necessary packages
 RUN set -ex; \
     apt-get update; \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
