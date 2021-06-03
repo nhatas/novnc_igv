@@ -20,29 +20,6 @@ You can customize the display height and width by passing them as variables.
 
 ## Stand-alone Demo
 
-Run on LSF: 
-Note: You'd want to fill in your own password rather than leave this blank
-```bash
-export LSF_DOCKER_PORTS='8080:8080'
-export PASSWORD=
-bsub -G compute-ris -Is -R 'select[port8080=1]' -q general-interactive -a 'docker(gcr.io/ris-registry-shared/novnc:latest)' supervisord -c /app/supervisord.conf
-```
-Since LSF is running interactively it will tell you the name of the blade it's running on. The blade will be the IP address
-needed to access the VNC. For example.
-```<<Starting on compute1-exec-187.ris.wustl.edu>>``` would mean the IP would be ```https://compute1-exec-187.compute.ris.wustl.edu:8080/vnc.html```
-The password will be what you set above.
-
-Some notable features:
-
-* An `x11` network is defined to link the IDE and novnc containers
-* The IDE `DISPLAY` environment variable is set using the novnc container name
-* The screen size is adjustable to suit your preferences via environment variables
-* The only exposed port is for HTTP browser connections
-
-## Bamboo CI/CD
-
-[CI/CD Pipeline setup in Bamboo](https://bamboo.ris.wustl.edu/browse/AE-DNP)
-
 ## On DockerHub / GitHub
 
 This container is based on work done by theasp:
