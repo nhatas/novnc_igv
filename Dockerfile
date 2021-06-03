@@ -51,7 +51,7 @@ COPY . /app
 WORKDIR /app
 RUN wget https://data.broadinstitute.org/igv/projects/downloads/snapshot/IGV_Linux_snapshot_WithJava.zip \
     && unzip IGV_Linux_snapshot_WithJava.zip \
-    && rm IGV_Linux_snapshot_WithJava \
+    && rm IGV_Linux_snapshot_WithJava.zip \
     && chmod -R 777 IGV_Linux_snapshot \ 
     && cd IGV_Linux_snapshot \
     && chmod a+x igv.sh
