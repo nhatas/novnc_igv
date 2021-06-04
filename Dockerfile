@@ -49,12 +49,16 @@ ENV HOME=/root \
 
 COPY . /app
 WORKDIR /app
-RUN wget https://data.broadinstitute.org/igv/projects/downloads/snapshot/IGV_Linux_snapshot_WithJava.zip \
-    && unzip IGV_Linux_snapshot_WithJava.zip \
-    && rm IGV_Linux_snapshot_WithJava.zip \
-    && chmod -R 777 IGV_Linux_snapshot \ 
-    && cd IGV_Linux_snapshot \
+# Install IGV
+ENV IGV_URL="https://data.broadinstitute.org/igv/projects/downloads/2.9/IGV_Linux_2.9.4_WithJava.zip"
+
+RUN wget ${IGV_URL} -O IGV.zip \
+    && IGV_DIR=`zipinfo -1 IGV.zip | cut -f 1 -d '/' | sort | uniq` \
+    && unzip IGV.zip \
+    && mv $IGV_DIR IGV \
+    && rm IGV.zip \
+    && chmod -R 777 IGV \ 
+    && cd IGV \
     && chmod a+x igv.sh
 
-ENV PATH=/app/IGV_Linux_snapshot:$PATH
-#RUN python3 -m unittest /app/test.py
+ENV PATH=/app/IGV:$PATH
